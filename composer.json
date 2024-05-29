@@ -1,0 +1,27 @@
+{
+	"name": "tohizma/f4-core",
+	"description": "A fork Shoofly by n0nag0n which is a fork of Fat-Free by Bong Cosca to update and elevate the framework to modern standards.",
+	"homepage": "http://fatfreeframework.com/",
+	"license": "GPL-3.0",
+	"require": {
+		"php": ">=8.1"
+	},
+	"autoload": {
+		"psr-4" : {
+			"F4\\" : "src/"
+		}
+	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "^3.7",
+		"phpunit/phpunit": "^9.6"
+	},
+	"scripts": {
+		"coverage" : "XDEBUG_MODE=coverage phpunit --coverage-html=.phpunit.cache/code-coverage/ --coverage-text",
+		"phpunit" : "phpunit",
+		"test" : "phpunit",
+		"phpcs" : "phpcs --standard=phpcs.xml -n",
+		"style" : "phpcs --standard=phpcs.xml -n",
+		"phpcbf" : "phpcbf --standard=phpcs.xml",
+		"beautify" : "phpcbf --standard=phpcs.xml"
+	}
+}
