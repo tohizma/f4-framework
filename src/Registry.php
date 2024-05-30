@@ -13,7 +13,7 @@ class Registry
     /**
     *   Return TRUE if object exists in catalog
     *   @return bool
-    *   @param $key string
+    *   @param string $key
     **/
     public static function exists($key)
     {
@@ -23,8 +23,8 @@ class Registry
     /**
     *   Add object to catalog
     *   @return object
-    *   @param $key string
-    *   @param $obj object
+    *   @param string $key
+    *   @param object $obj
     **/
     public static function set($key, $obj)
     {
@@ -34,7 +34,7 @@ class Registry
     /**
     *   Retrieve object from catalog
     *   @return object
-    *   @param $key string
+    *   @param string $key
     **/
     public static function get($key)
     {
@@ -43,7 +43,7 @@ class Registry
 
     /**
     *   Delete object from catalog
-    *   @param $key string
+    *   @param string $key
     **/
     public static function clear($key)
     {

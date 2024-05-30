@@ -40,7 +40,7 @@ class Basket extends Magic
     /**
     *   Instantiate class
     *   @return void
-    *   @param $key string
+    *   @param string $key
     **/
     public function __construct($key = 'basket')
     {
@@ -55,7 +55,7 @@ class Basket extends Magic
     /**
     *   Return TRUE if field is defined
     *   @return bool
-    *   @param $key string
+    *   @param string $key
     **/
     public function exists($key)
     {
@@ -65,8 +65,8 @@ class Basket extends Magic
     /**
     *   Assign value to field
     *   @return scalar|FALSE
-    *   @param $key string
-    *   @param $val scalar
+    *   @param string $key
+    *   @param scalar $val
     **/
     public function set($key, $val)
     {
@@ -76,7 +76,7 @@ class Basket extends Magic
     /**
     *   Retrieve value of field
     *   @return scalar|FALSE
-    *   @param $key string
+    *   @param string $key
     **/
     public function &get($key)
     {
@@ -93,7 +93,7 @@ class Basket extends Magic
     /**
     *   Delete field
     *   @return NULL
-    *   @param $key string
+    *   @param string $key
     **/
     public function clear($key)
     {
@@ -104,8 +104,8 @@ class Basket extends Magic
     *   Return items that match key/value pair;
     *   If no key/value pair specified, return all items
     *   @return array
-    *   @param $key string
-    *   @param $val mixed
+    *   @param string $key 
+    *   @param mixed $val 
     **/
     public function find($key = null, $val = null)
     {
@@ -129,8 +129,8 @@ class Basket extends Magic
     /**
     *   Return first item that matches key/value pair
     *   @return object|FALSE
-    *   @param $key string
-    *   @param $val mixed
+    *   @param string $key
+    *   @param mixed $val
     **/
     public function findone($key, $val)
     {
@@ -140,8 +140,8 @@ class Basket extends Magic
     /**
     *   Map current item to matching key/value pair
     *   @return array
-    *   @param $key string
-    *   @param $val mixed
+    *   @param string $key
+    *   @param mixed $val
     **/
     public function load($key, $val)
     {
@@ -187,8 +187,8 @@ class Basket extends Magic
     /**
     *   Erase item matching key/value pair
     *   @return bool
-    *   @param $key string
-    *   @param $val mixed
+    *   @param string $key
+    *   @param mixed $val
     **/
     public function erase($key, $val)
     {
@@ -225,7 +225,7 @@ class Basket extends Magic
     /**
     *   Hydrate item using hive array variable
     *   @return NULL
-    *   @param $var array|string
+    *   @param array|string $var
     **/
     public function copyfrom($var)
     {
@@ -240,7 +240,7 @@ class Basket extends Magic
     /**
     *   Populate hive array variable with item contents
     *   @return NULL
-    *   @param $key string
+    *   @param string $key
     **/
     public function copyto($key)
     {

@@ -26,6 +26,7 @@ namespace F4\Database\SQL;
 use F4\Database\Cursor;
 use F4\Base;
 use F4\Database\SQL;
+use Traversable;
 
 //! SQL data mapper
 class Mapper extends Cursor
@@ -57,10 +58,10 @@ class Mapper extends Cursor
 
     /**
     *   Instantiate class
-    *   @param $db \DB\SQL
-    *   @param $table string
-    *   @param $fields array|string
-    *   @param $ttl int|array
+    *   @param \DB\SQL $db
+    *   @param string $table
+    *   @param array|string $fields
+    *   @param int|array $ttl
     **/
     public function __construct(SQL $db, $table, $fields = null, $ttl = 60)
     {
@@ -96,7 +97,7 @@ class Mapper extends Cursor
     /**
     *   Return TRUE if any/specified field value has changed
     *   @return bool
-    *   @param $key string
+    *   @param string $key
     **/
     public function changed($key = null)
     {
@@ -114,7 +115,7 @@ class Mapper extends Cursor
     /**
     *   Return TRUE if field is defined
     *   @return bool
-    *   @param $key string
+    *   @param string $key
     **/
     public function exists($key)
     {
@@ -124,8 +125,8 @@ class Mapper extends Cursor
     /**
     *   Assign value to field
     *   @return scalar
-    *   @param $key string
-    *   @param $val scalar
+    *   @param string $key
+    *   @param scalar $val
     **/
     public function set($key, $val)
     {
@@ -154,7 +155,7 @@ class Mapper extends Cursor
     /**
     *   Retrieve value of field
     *   @return scalar
-    *   @param $key string
+    *   @param string $key
     **/
     public function &get($key)
     {
@@ -173,7 +174,7 @@ class Mapper extends Cursor
     /**
     *   Clear value of field
     *   @return NULL
-    *   @param $key string
+    *   @param string $key
     **/
     public function clear($key)
     {
@@ -187,8 +188,8 @@ class Mapper extends Cursor
     /**
     *   Invoke dynamic method
     *   @return mixed
-    *   @param $func string
-    *   @param $args array
+    *   @param string $func
+    *   @param array $args
     *   @deprecated (this is only used for custom dynamic properties that are callables
     **/
     public function __call($func, $args)
@@ -200,7 +201,7 @@ class Mapper extends Cursor
     /**
     *   Convert array to mapper object
     *   @return static
-    *   @param $row array
+    *   @param array $row
     **/
     public function factory($row)
     {
@@ -230,7 +231,7 @@ class Mapper extends Cursor
     /**
     *   Return fields of mapper object as an associative array
     *   @return array
-    *   @param $obj object
+    *   @param object $obj
     **/
     public function cast($obj = null)
     {
@@ -248,9 +249,9 @@ class Mapper extends Cursor
     /**
     *   Build query string and arguments
     *   @return array
-    *   @param $fields string
-    *   @param $filter string|array
-    *   @param $options array
+    *   @param string $fields
+    *   @param string|array $filter
+    *   @param array $options
     **/
     public function stringify($fields, $filter = null, array $options = null)
     {
@@ -363,10 +364,10 @@ class Mapper extends Cursor
     /**
     *   Build query string and execute
     *   @return static[]
-    *   @param $fields string
-    *   @param $filter string|array
-    *   @param $options array
-    *   @param $ttl int|array
+    *   @param string $fields
+    *   @param string|array $filter
+    *   @param array $options
+    *   @param int|array $ttl
     **/
     public function select($fields, $filter = null, array $options = null, $ttl = 0)
     {
@@ -394,9 +395,9 @@ class Mapper extends Cursor
     /**
     *   Return records that match criteria
     *   @return static[]
-    *   @param $filter string|array
-    *   @param $options array
-    *   @param $ttl int|array
+    *   @param string|array $filter
+    *   @param array $options
+    *   @param int|array $ttl
     **/
     public function find($filter = null, array $options = null, $ttl = 0)
     {
@@ -429,9 +430,9 @@ class Mapper extends Cursor
     /**
     *   Count records that match criteria
     *   @return int
-    *   @param $filter string|array
-    *   @param $options array
-    *   @param $ttl int|array
+    *   @param string|array $filter
+    *   @param array $options
+    *   @param int|array $ttl
     **/
     public function count($filter = null, array $options = null, $ttl = 0)
     {
@@ -475,7 +476,7 @@ class Mapper extends Cursor
     *   Return record at specified offset using same criteria as
     *   previous load() call and make it active
     *   @return static
-    *   @param $ofs int
+    *   @param int $ofs
     **/
     public function skip($ofs = 1)
     {
@@ -723,8 +724,8 @@ class Mapper extends Cursor
     /**
     *   Delete current record
     *   @return int
-    *   @param $quick bool
-    *   @param $filter string|array
+    *   @param bool $quick
+    *   @param string|array $filter
     **/
     public function erase($filter = null, $quick = true)
     {
@@ -818,8 +819,8 @@ class Mapper extends Cursor
     /**
     *   Hydrate mapper object using hive array variable
     *   @return NULL
-    *   @param $var array|string
-    *   @param $func callback
+    *   @param array|string $var
+    *   @param callable $func
     **/
     public function copyfrom($var, $func = null)
     {
@@ -839,7 +840,7 @@ class Mapper extends Cursor
     /**
     *   Populate hive array variable with mapper fields
     *   @return NULL
-    *   @param $key string
+    *   @param string $key
     **/
     public function copyto($key)
     {
@@ -852,7 +853,7 @@ class Mapper extends Cursor
     /**
     *   Return schema and, if the first argument is provided, update it
     *   @return array
-    *   @param $fields NULL|array
+    *   @param NULL|array $fields
     **/
     public function schema($fields = null)
     {
@@ -865,7 +866,7 @@ class Mapper extends Cursor
     /**
     *   Return field names
     *   @return array
-    *   @param $adhoc bool
+    *   @param bool $adhoc
     **/
     public function fields($adhoc = true)
     {
@@ -875,7 +876,7 @@ class Mapper extends Cursor
     /**
     *   Return TRUE if field is not nullable
     *   @return bool
-    *   @param $field string
+    *   @param string $field
     **/
     public function required($field)
     {
@@ -887,14 +888,14 @@ class Mapper extends Cursor
     *   Retrieve external iterator for fields
     *   @return object
     **/
-    public function getiterator()
+    public function getiterator() : Traversable
     {
         return new \ArrayIterator($this->cast());
     }
 
     /**
     *   Assign alias for table
-    *   @param $alias string
+    *   @param string $alias
     **/
     public function alias($alias)
     {

@@ -33,7 +33,7 @@ class Geo extends Prefab
     /**
     *   Return information about specified Unix time zone
     *   @return array
-    *   @param $zone string
+    *   @param string $zone
     **/
     public function tzinfo($zone)
     {
@@ -55,7 +55,7 @@ class Geo extends Prefab
     /**
     *   Return geolocation data based on specified/auto-detected IP address
     *   @return array|FALSE
-    *   @param $ip string
+    *   @param string $ip
     **/
     public function location($ip = null)
     {
@@ -71,14 +71,14 @@ class Geo extends Prefab
             FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_NO_PRIV_RANGE
         );
         if (function_exists('geoip_db_avail') &&
-            geoip_db_avail(GEOIP_CITY_EDITION_REV1) &&
-            $out = @geoip_record_by_name($ip)
+            \geoip_db_avail(GEOIP_CITY_EDITION_REV1) &&
+            $out = @\geoip_record_by_name($ip)
         ) {
             $out['request'] = $ip;
             $out['region_code'] = $out['region'];
             $out['region_name'] = '';
             if (!empty($out['country_code']) && !empty($out['region'])) {
-                $out['region_name'] = geoip_region_name_by_code(
+                $out['region_name'] = \geoip_region_name_by_code(
                     $out['country_code'],
                     $out['region']
                 );
@@ -106,9 +106,9 @@ class Geo extends Prefab
     /**
     *   Return weather data based on specified latitude/longitude
     *   @return array|FALSE
-    *   @param $latitude float
-    *   @param $longitude float
-    *   @param $key string
+    *   @param float $latitude
+    *   @param float $longitude
+    *   @param string $key
     **/
     public function weather($latitude, $longitude, $key)
     {

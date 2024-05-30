@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
     Copyright (c) 2009-2019 F3::Factory/Bong Cosca, All rights reserved.
 
     This file is part of the Fat-Free Framework (http://fatfreeframework.com).
@@ -31,7 +31,7 @@ class Utf extends Prefab
      *    Get string length
      *
      * @return integer
-     * @param  $str string
+     * @param string $str
      **/
     public function strlen($str)
     {
@@ -44,7 +44,7 @@ class Utf extends Prefab
      *    Reverse a string
      *
      * @return string
-     * @param  $str string
+     * @param string $str
      **/
     public function strrev($str)
     {
@@ -57,9 +57,9 @@ class Utf extends Prefab
      *    Find position of first occurrence of a string (case-insensitive)
      *
      * @return integer|FALSE
-     * @param  $stack  string
-     * @param  $needle string
-     * @param  $ofs    int
+     * @param  string $stack
+     * @param  string $needle
+     * @param  int $ofs
      **/
     public function stripos($stack, $needle, $ofs = 0)
     {
@@ -71,10 +71,10 @@ class Utf extends Prefab
      *    Find position of first occurrence of a string
      *
      * @return integer|FALSE
-     * @param  $stack  string
-     * @param  $needle string
-     * @param  $ofs    int
-     * @param  $case   bool
+     * @param  string $stack
+     * @param  string $needle
+     * @param  int $ofs
+     * @param  bool $case
      **/
     public function strpos($stack, $needle, $ofs = 0, $case = false)
     {
@@ -91,9 +91,9 @@ class Utf extends Prefab
      *    needle to the end of haystack (case-insensitive)
      *
      * @return string|FALSE
-     * @param  $stack  string
-     * @param  $needle string
-     * @param  $before bool
+     * @param  string $stack
+     * @param  string $needle
+     * @param  bool $before
      **/
     public function stristr($stack, $needle, $before = false)
     {
@@ -106,10 +106,10 @@ class Utf extends Prefab
      *    needle to the end of haystack
      *
      * @return string|FALSE
-     * @param  $stack  string
-     * @param  $needle string
-     * @param  $before bool
-     * @param  $case   bool
+     * @param  string $stack
+     * @param  string $needle
+     * @param  bool $before
+     * @param  bool $case
      **/
     public function strstr($stack, $needle, $before = false, $case = false)
     {
@@ -130,9 +130,9 @@ class Utf extends Prefab
      *    Return part of a string
      *
      * @return string|FALSE
-     * @param  $str   string
-     * @param  $start int
-     * @param  $len   int
+     * @param  string $str
+     * @param  int $start
+     * @param  int $len
      **/
     public function substr($str, $start, $len = 0)
     {
@@ -152,8 +152,8 @@ class Utf extends Prefab
      *    Count the number of substring occurrences
      *
      * @return integer
-     * @param  $stack  string
-     * @param  $needle string
+     * @param  string $stack
+     * @param  string $needle
      **/
     public function substrCount($stack, $needle)
     {
@@ -171,7 +171,7 @@ class Utf extends Prefab
      *    Strip whitespaces from the beginning of a string
      *
      * @return string
-     * @param  $str string
+     * @param  string $str
      **/
     public function ltrim($str)
     {
@@ -183,7 +183,7 @@ class Utf extends Prefab
      *    Strip whitespaces from the end of a string
      *
      * @return string
-     * @param  $str string
+     * @param  string $str
      **/
     public function rtrim($str)
     {
@@ -195,7 +195,7 @@ class Utf extends Prefab
      *    Strip whitespaces from the beginning and end of a string
      *
      * @return string
-     * @param  $str string
+     * @param  string $str
      **/
     public function trim($str)
     {
@@ -218,7 +218,7 @@ class Utf extends Prefab
      *    Convert code points to Unicode symbols
      *
      * @return string
-     * @param  $str string
+     * @param  string $str
      **/
     public function translate($str)
     {
@@ -232,7 +232,7 @@ class Utf extends Prefab
      *    Translate emoji tokens to Unicode font-supported symbols
      *
      * @return string
-     * @param  $str string
+     * @param  string $str
      **/
     public function emojify($str)
     {

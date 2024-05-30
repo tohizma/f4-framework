@@ -16,7 +16,7 @@ class Cache extends Prefab
 
     /**
     *   Class constructor
-    *   @param $dsn bool|string
+    *   @param bool|string $dsn
     **/
     public function __construct($dsn = false)
     {
@@ -28,8 +28,8 @@ class Cache extends Prefab
     /**
     *   Load/auto-detect cache backend
     *   @return string
-    *   @param $dsn bool|string
-    *   @param $seed bool|string
+    *   @param bool|string $dsn
+    *   @param bool|string$seed
     **/
     public function load($dsn, $seed = null)
     {
@@ -94,8 +94,8 @@ class Cache extends Prefab
     /**
     *   Return timestamp and TTL of cache entry or FALSE if not found
     *   @return array|FALSE
-    *   @param $key string
-    *   @param $val mixed
+    *   @param string $key
+    *   @param mixed $val
     **/
     public function exists($key, &$val = null)
     {
@@ -145,9 +145,9 @@ class Cache extends Prefab
     /**
     *   Store value in cache
     *   @return mixed|FALSE
-    *   @param $key string
-    *   @param $val mixed
-    *   @param $ttl int
+    *   @param string $key
+    *   @param mixed $val
+    *   @param int $ttl
     **/
     public function set($key, $val, $ttl = 0)
     {
@@ -185,7 +185,7 @@ class Cache extends Prefab
     /**
     *   Retrieve value of cache entry
     *   @return mixed|FALSE
-    *   @param $key string
+    *   @param string $key
     **/
     public function get($key)
     {
@@ -195,7 +195,7 @@ class Cache extends Prefab
     /**
     *   Delete cache entry
     *   @return bool
-    *   @param $key string
+    *   @param string $key
     **/
     public function clear($key)
     {
@@ -227,7 +227,7 @@ class Cache extends Prefab
     /**
     *   Clear contents of cache backend
     *   @return bool
-    *   @param $suffix string
+    *   @param string $suffix
     **/
     public function reset($suffix = null)
     {

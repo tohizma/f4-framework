@@ -43,10 +43,10 @@ class Session extends Mapper
 
     /**
     *   Instantiate class
-    *   @param $db Jig
-    *   @param $file string
-    *   @param $onsuspect callback
-    *   @param $key string
+    *   @param Jig $db
+    *   @param string $file
+    *   @param callback $onsuspect
+    *   @param string $key
     **/
     public function __construct(Jig $db, $file = 'sessions', $onsuspect = null, $key = null)
     {
@@ -77,8 +77,8 @@ class Session extends Mapper
     /**
     *   Open session
     *   @return TRUE
-    *   @param $path string
-    *   @param $name string
+    *   @param string $path
+    *   @param string $name
     **/
     public function open($path, $name)
     {
@@ -99,7 +99,7 @@ class Session extends Mapper
     /**
     *   Return session data in serialized format
     *   @return string
-    *   @param $id string
+    *   @param string $id
     **/
     public function read($id)
     {
@@ -126,8 +126,8 @@ class Session extends Mapper
     /**
     *   Write session data
     *   @return TRUE
-    *   @param $id string
-    *   @param $data string
+    *   @param string $id
+    *   @param string $data
     **/
     public function write($id, $data)
     {
@@ -143,7 +143,7 @@ class Session extends Mapper
     /**
     *   Destroy session
     *   @return TRUE
-    *   @param $id string
+    *   @param string $id
     **/
     public function destroy($id)
     {
@@ -154,7 +154,7 @@ class Session extends Mapper
     /**
     *   Garbage collector
     *   @return TRUE
-    *   @param $max int
+    *   @param int $max
     **/
     public function cleanup($max)
     {

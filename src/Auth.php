@@ -43,9 +43,9 @@ class Auth
     /**
     *   Instantiate class
     *   @return object
-    *   @param $storage string|object
-    *   @param $args array
-    *   @param $func callback
+    *   @param string|object $storage
+    *   @param array $args
+    *   @param callback $func
     **/
     public function __construct($storage, array $args = null, $func = null)
     {
@@ -63,9 +63,9 @@ class Auth
     /**
     *   Jig storage handler
     *   @return bool
-    *   @param $id string
-    *   @param $pw string
-    *   @param $realm string
+    *   @param string $id
+    *   @param string $pw
+    *   @param string $realm
     **/
     protected function jig($id, $pw, $realm)
     {
@@ -95,9 +95,9 @@ class Auth
     /**
     *   MongoDB storage handler
     *   @return bool
-    *   @param $id string
-    *   @param $pw string
-    *   @param $realm string
+    *   @param string $id
+    *   @param string $pw
+    *   @param string $realm
     **/
     protected function mongo($id, $pw, $realm)
     {
@@ -117,9 +117,9 @@ class Auth
     /**
     *   SQL storage handler
     *   @return bool
-    *   @param $id string
-    *   @param $pw string
-    *   @param $realm string
+    *   @param string $id
+    *   @param string $pw
+    *   @param string $realm
     **/
     protected function sql($id, $pw, $realm)
     {
@@ -149,8 +149,8 @@ class Auth
     /**
     *   LDAP storage handler
     *   @return bool
-    *   @param $id string
-    *   @param $pw string
+    *   @param string $id
+    *   @param string $pw
     **/
     protected function ldap($id, $pw)
     {
@@ -194,8 +194,8 @@ class Auth
     /**
     *   SMTP storage handler
     *   @return bool
-    *   @param $id string
-    *   @param $pw string
+    *   @param string $id
+    *   @param string $pw
     **/
     protected function smtp($id, $pw)
     {
@@ -252,9 +252,9 @@ class Auth
     /**
     *   Login auth mechanism
     *   @return bool
-    *   @param $id string
-    *   @param $pw string
-    *   @param $realm string
+    *   @param string $id
+    *   @param string $pw
+    *   @param string $realm
     **/
     public function login($id, $pw, $realm = null)
     {
@@ -264,7 +264,7 @@ class Auth
     /**
     *   HTTP basic auth mechanism
     *   @return bool
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function basic($func = null)
     {

@@ -23,6 +23,8 @@ declare(strict_types=1);
 
 namespace F4\Cli;
 
+use F4\Cli\Websocket\Agent;
+
 //! RFC6455 WebSocket server
 class Websocket
 {
@@ -56,9 +58,22 @@ class Websocket
     protected $events = [];
 
     /**
+    *   @param string $addr
+    *   @param resource $ctx
+    *   @param int $wait
+    **/
+    public function __construct($addr, $ctx = null, $wait = 60)
+    {
+        $this->addr = $addr;
+        $this->ctx = $ctx ?: stream_context_create();
+        $this->wait = $wait;
+        $this->events = [];
+    }
+
+    /**
     *   Allocate stream socket
     *   @return NULL
-    *   @param $socket resource
+    *   @param resource $socket
     **/
     public function alloc($socket)
     {
@@ -134,7 +149,7 @@ class Websocket
     /**
     *   Close stream socket
     *   @return NULL
-    *   @param $socket resource
+    *   @param resource $socket
     **/
     public function close($socket)
     {
@@ -148,8 +163,8 @@ class Websocket
     /**
     *   Read from stream socket
     *   @return string|FALSE
-    *   @param $socket resource
-    *   @param $len int
+    *   @param resource $socket
+    *   @param int $len
     **/
     public function read($socket, $len = 0)
     {
@@ -173,8 +188,8 @@ class Websocket
     /**
     *   Write to stream socket
     *   @return int|FALSE
-    *   @param $socket resource
-    *   @param $buf string
+    *   @param resource $socket
+    *   @param string $buf
     **/
     public function write($socket, $buf)
     {
@@ -198,7 +213,7 @@ class Websocket
     /**
     *   Return socket agents
     *   @return array
-    *   @param $uri string
+    *   @param string $uri
     ***/
     public function agents($uri = null)
     {
@@ -226,8 +241,8 @@ class Websocket
     /**
     *   Bind function to event handler
     *   @return object
-    *   @param $event string
-    *   @param $func callable
+    *   @param string $event
+    *   @param callable $func
     **/
     public function on($event, $func)
     {
@@ -294,7 +309,7 @@ class Websocket
                 $empty,
                 $empty,
                 (int)$wait,
-                round(1e6 * ($wait - (int)$wait))
+                (int) round(1e6 * ($wait - (int)$wait))
             );
             if (is_bool($count) && $wait) {
                 if (isset($this->events['error']) &&
@@ -349,18 +364,5 @@ class Websocket
             }
             gc_collect_cycles();
         }
-    }
-
-    /**
-    *   @param $addr string
-    *   @param $ctx resource
-    *   @param $wait int
-    **/
-    public function __construct($addr, $ctx = null, $wait = 60)
-    {
-        $this->addr = $addr;
-        $this->ctx = $ctx ?: stream_context_create();
-        $this->wait = $wait;
-        $this->events = [];
-    }
+    }    
 }

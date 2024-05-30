@@ -44,7 +44,7 @@ class Test
     /**
     *   Class constructor
     *   @return NULL
-    *   @param $level int
+    *   @param int $level
     **/
     public function __construct($level = self::FLAG_Both)
     {
@@ -72,8 +72,8 @@ class Test
     /**
     *   Evaluate condition and save test result
     *   @return object
-    *   @param $cond bool
-    *   @param $text string
+    *   @param bool $cond
+    *   @param string $text
     **/
     public function expect($cond, $text = null)
     {
@@ -98,7 +98,7 @@ class Test
     /**
     *   Append message to test results
     *   @return NULL
-    *   @param $text string
+    *   @param string $text
     **/
     public function message($text)
     {

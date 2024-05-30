@@ -38,8 +38,8 @@ class Web extends Prefab
     /**
     *   Detect MIME type using file extension or file inspection
     *   @return string
-    *   @param $file string
-    *   @param $inspect bool
+    *   @param string $file
+    *   @param bool $inspect
     **/
     public function mime($file, $inspect = false)
     {
@@ -174,7 +174,7 @@ class Web extends Prefab
     *    If a list of MIME types is specified, return the best match; or
     *    FALSE if none found
     *    @return array|string|FALSE
-    *    @param $list string|array
+    *    @param string|array $list
     **/
     public function acceptable($list = null)
     {
@@ -210,12 +210,12 @@ class Web extends Prefab
     *    Transmit file to HTTP client; Return file size if successful,
     *    FALSE otherwise
     *    @return int|FALSE
-    *    @param $file string
-    *    @param $mime string
-    *    @param $kbps int
-    *    @param $force bool
-    *    @param $name string
-    *    @param $flush bool
+    *    @param string $file
+    *    @param string $mime
+    *    @param int $kbps
+    *    @param bool $force
+    *    @param string $name
+    *    @param bool $flush
     **/
     public function send($file, $mime = null, $kbps = 0, $force = true, $name = null, $flush = true)
     {
@@ -250,7 +250,7 @@ class Web extends Prefab
                     // Throttle output
                     ++$ctr;
                     if ($ctr / $kbps > $elapsed = microtime(true) - $start) {
-                        usleep(round(1e6 * ($ctr / $kbps - $elapsed)));
+                        usleep((int) round(1e6 * ($ctr / $kbps - $elapsed)));
                     }
                 }
                 // Send 1KiB and reset timer
@@ -268,9 +268,9 @@ class Web extends Prefab
     /**
     *    Receive file(s) from HTTP client
     *    @return array|bool
-    *    @param $func callback
-    *    @param $overwrite bool
-    *    @param $slug callback|bool
+    *    @param callback $func
+    *    @param bool $overwrite
+    *    @param callback|bool $slug
     **/
     public function receive($func = null, $overwrite = false, $slug = true)
     {
@@ -357,7 +357,7 @@ class Web extends Prefab
     /**
     *    Return upload progress in bytes, FALSE on failure
     *    @return int|FALSE
-    *    @param $id string
+    *    @param string $id
     **/
     public function progress($id)
     {
@@ -370,8 +370,8 @@ class Web extends Prefab
     /**
     *    HTTP request via cURL
     *    @return array
-    *    @param $url string
-    *    @param $options array
+    *    @param string $url
+    *    @param array $options
     **/
     protected function curl($url, $options)
     {
@@ -452,8 +452,8 @@ class Web extends Prefab
     /**
     *    HTTP request via PHP stream wrapper
     *    @return array
-    *    @param $url string
-    *    @param $options array
+    *    @param string $url
+    *    @param array $options
     **/
     protected function stream($url, $options)
     {
@@ -462,7 +462,7 @@ class Web extends Prefab
             $options['proxy'] = preg_replace('/https?/i', 'tcp', $options['proxy']);
             $options['request_fulluri'] = true;
             if (preg_match('/socks4?/i', $options['proxy'])) {
-                return $this->_socket($url, $options);
+                return $this->socket($url, $options);
             }
         }
         $options['header'] = implode($eol, $options['header']);
@@ -507,8 +507,8 @@ class Web extends Prefab
     /**
     *    HTTP request via low-level TCP/IP socket
     *    @return array
-    *    @param $url string
-    *    @param $options array
+    *    @param string $url
+    *    @param array $options
     **/
     protected function socket($url, $options)
     {
@@ -622,7 +622,7 @@ class Web extends Prefab
     *    Specify the HTTP request engine to use; If not available,
     *    fall back to an applicable substitute
     *    @return string
-    *    @param $arg string
+    *    @param string $arg
     **/
     public function engine($arg = 'curl')
     {
@@ -646,8 +646,8 @@ class Web extends Prefab
     /**
     *    Replace old headers with new elements
     *    @return NULL
-    *    @param $old array
-    *    @param $new string|array
+    *    @param array $old
+    *    @param string|array $new
     **/
     public function subst(array &$old, $new)
     {
@@ -669,8 +669,8 @@ class Web extends Prefab
     *    http://www.php.net/manual/en/context.http.php) if specified;
     *    Cache the page as instructed by remote server
     *    @return array|FALSE
-    *    @param $url string
-    *    @param $options array
+    *    @param string $url
+    *    @param array $options
     **/
     public function request($url, array $options = null)
     {
@@ -788,10 +788,10 @@ class Web extends Prefab
  *   Strip Javascript/CSS files of extraneous whitespaces and comments;
  *   Return combined output as a minified string
  *   @return string
- *   @param $files string|array
- *   @param $mime string
- *   @param $header bool
- *   @param $path string
+ *   @param string|array $files
+ *   @param string $mime
+ *   @param bool $header
+ *   @param string $path
  **/
     public function minify($files, $mime = null, $header = true, $path = null)
     {
@@ -967,9 +967,9 @@ class Web extends Prefab
  /**
  *   Retrieve RSS feed and return as an array
  *   @return array|FALSE
- *   @param $url string
- *   @param $max int
- *   @param $tags string
+ *   @param string $url
+ *   @param int $max
+ *   @param string $tags
  **/
     public function rss($url, $max = 10, $tags = null)
     {
@@ -1011,8 +1011,8 @@ class Web extends Prefab
  /**
  *   Retrieve information from whois server
  *   @return string|FALSE
- *   @param $addr string
- *   @param $server string
+ *   @param string $addr
+ *   @param string $server
  **/
     public function whois($addr, $server = 'whois.internic.net')
     {
@@ -1023,7 +1023,7 @@ class Web extends Prefab
         }
         // Set connection timeout parameters
         stream_set_blocking($socket, false);
-        stream_set_timeout($socket, ini_get('default_socket_timeout'));
+        stream_set_timeout($socket, (int) ini_get('default_socket_timeout'));
         // Send request
         fputs($socket, $addr . "\r\n");
         $info = stream_get_meta_data($socket);
@@ -1099,7 +1099,7 @@ class Web extends Prefab
  /**
  *   Return a URL/filesystem-friendly version of string
  *   @return string
- *   @param $text string
+ *   @param string $text
  **/
     public function slug($text)
     {
@@ -1113,9 +1113,9 @@ class Web extends Prefab
  /**
  *   Return chunk of text from standard Lorem Ipsum passage
  *   @return string
- *   @param $count int
- *   @param $max int
- *   @param $std bool
+ *   @param int $count
+ *   @param int $max
+ *   @param bool $std
  **/
     public function filler($count = 1, $max = 20, $std = true)
     {
@@ -1158,7 +1158,7 @@ if (!function_exists('gzdecode')) {
 
  /**
  *   Decode gzip-compressed string
- *   @param $str string
+ *   @param string $str
  *   @return string
  **/
     function gzdecode($str)

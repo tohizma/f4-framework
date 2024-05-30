@@ -56,10 +56,10 @@ class SQL
 
     /**
     *   Instantiate class
-    *   @param $dsn string
-    *   @param $user string
-    *   @param $pw string
-    *   @param $options array
+    *   @param string $dsn
+    *   @param string $user
+    *   @param string $pw
+    *   @param array $options
     **/
     public function __construct($dsn, $user = null, $pw = null, array $options = null)
     {
@@ -130,7 +130,7 @@ class SQL
     /**
     *   Map data type of argument to a PDO constant
     *   @return int
-    *   @param $val scalar
+    *   @param scalar $val
     **/
     public function type($val)
     {
@@ -153,8 +153,8 @@ class SQL
     /**
     *   Cast value to PHP type
     *   @return mixed
-    *   @param $type string
-    *   @param $val mixed
+    *   @param string $type
+    *   @param mixed $val
     **/
     public function value($type, $val)
     {
@@ -180,11 +180,11 @@ class SQL
     /**
     *   Execute SQL statement(s)
     *   @return array|int|FALSE
-    *   @param $cmds string|array
-    *   @param $args string|array
-    *   @param $ttl int|array
-    *   @param $log bool
-    *   @param $stamp bool
+    *   @param string|array $cmds
+    *   @param string|array $args
+    *   @param int|array $ttl
+    *   @param bool $log
+    *   @param bool $stamp
     **/
     public function exec($cmds, $args = null, $ttl = 0, $log = true, $stamp = false)
     {
@@ -353,7 +353,7 @@ class SQL
     /**
     *   Return SQL profiler results (or disable logging)
     *   @return string
-    *   @param $flag bool
+    *   @param bool $flag
     **/
     public function log($flag = true)
     {
@@ -366,7 +366,7 @@ class SQL
     /**
     *   Return TRUE if table exists
     *   @return bool
-    *   @param $table string
+    *   @param string $table
     **/
     public function exists($table)
     {
@@ -381,9 +381,9 @@ class SQL
     /**
     *   Retrieve schema of SQL table
     *   @return array|FALSE
-    *   @param $table string
-    *   @param $fields array|string
-    *   @param $ttl int|array
+    *   @param string $table
+    *   @param array|string $fields
+    *   @param int|array $ttl
     **/
     public function schema($table, $fields = null, $ttl = 0)
     {
@@ -530,8 +530,8 @@ class SQL
     /**
     *   Quote string
     *   @return string
-    *   @param $val mixed
-    *   @param $type int
+    *   @param mixed $val
+    *   @param int $type
     **/
     public function quote($val, $type = \PDO::PARAM_STR)
     {
@@ -590,7 +590,7 @@ class SQL
     /**
     *   Return quoted identifier name
     *   @return string
-    *   @param $key
+    *   @param string $key
     *   @param bool $split
      **/
     public function quotekey($key, $split = true)
@@ -614,8 +614,8 @@ class SQL
     /**
     *   Redirect call to PDO object
     *   @return mixed
-    *   @param $func string
-    *   @param $args array
+    *   @param string $func
+    *   @param array $args
     **/
     public function __call($func, array $args)
     {

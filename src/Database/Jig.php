@@ -50,8 +50,8 @@ class Jig
 
     /**
     *   Instantiate class
-    *   @param $dir string
-    *   @param $format int
+    *   @param string $dir
+    *   @param int $format
     **/
     public function __construct($dir = null, $format = self::FORMAT_JSON, $lazy = false)
     {
@@ -79,7 +79,7 @@ class Jig
     /**
     *   Read data from memory/file
     *   @return array
-    *   @param $file string
+    *   @param string $file
     **/
     public function &read($file)
     {
@@ -109,8 +109,8 @@ class Jig
     /**
     *   Write data to memory/file
     *   @return int
-    *   @param $file string
-    *   @param $data array
+    *   @param string $file
+    *   @param array $data
     **/
     public function write($file, array $data = null)
     {
@@ -153,7 +153,7 @@ class Jig
 
     /**
     *   Return profiler results (or disable logging)
-    *   @param $flag bool
+    *   @param bool $flag
     *   @return string
     **/
     public function log($flag = true)
@@ -167,7 +167,7 @@ class Jig
     /**
     *   Jot down log entry
     *   @return NULL
-    *   @param $frame string
+    *   @param string $frame
     **/
     public function jot($frame)
     {

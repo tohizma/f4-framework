@@ -32,7 +32,7 @@ use stdClass;
 class Base extends Prefab implements ArrayAccess
 {
     public const PACKAGE = 'F4';
-    public const VERSION = '1.0.0';
+    public const VERSION = '3.8.2';
 
     /**
      * HTTP Status Codes
@@ -1414,15 +1414,7 @@ class Base extends Prefab implements ArrayAccess
                                         ) {
                                             $currency_symbol = $prop;
                                         }
-                                        if (!$cstm &&
-                                            function_exists('money_format') &&
-                                            version_compare(PHP_VERSION, '7.4.0') < 0
-                                        ) {
-                                            return money_format(
-                                                '%' . ($int ? 'i' : 'n'),
-                                                $args[$pos]
-                                            );
-                                        }
+                                        
                                         $fmt = [
                                            0 => '(nc)',1 => '(n c)',
                                            2 => '(nc)',10 => '+nc',
@@ -1481,55 +1473,37 @@ class Base extends Prefab implements ArrayAccess
                                 $decimal_point,
                                 $thousands_sep
                             );
-                        case 'date':
-                            if ($php81) {
-                                $lang = $this->split($this->LANGUAGE);
-                                // requires intl extension
-                                $dateType = (empty($mod) || $mod == 'short') ? IntlDateFormatter::SHORT :
-                                 ($mod == 'full' ? IntlDateFormatter::FULL : IntlDateFormatter::LONG);
-                                $pattern = $dateType === IntlDateFormatter::SHORT
-                                 ? (($ptn = \IntlDatePatternGenerator::create($lang[0]))
-                                     ? $ptn->getBestPattern('yyyyMMdd') : null) : null;
-                                $formatter = new IntlDateFormatter(
-                                    $lang[0],
-                                    $dateType,
-                                    IntlDateFormatter::NONE,
-                                    null,
-                                    null,
-                                    $pattern
-                                );
-                                return $formatter->format($args[$pos]);
-                            } else {
-                                if (empty($mod) || $mod == 'short') {
-                                    $prop = '%x';
-                                } elseif ($mod == 'full') {
-                                    $prop = '%A, %d %B %Y';
-                                } elseif ($mod != 'custom') {
-                                    $prop = '%d %B %Y';
-                                }
-                                return strftime($prop, $args[$pos]);
-                            }
-                        case 'time':
-                            if ($php81) {
-                                      $lang = $this->split($this->LANGUAGE);
-                                      // requires intl extension
-                                      $formatter = new IntlDateFormatter(
-                                          $lang[0],
-                                          IntlDateFormatter::NONE,
-                                          (empty($mod) || $mod == 'short')
-                                          ? IntlDateFormatter::SHORT :
-                                          ($mod == 'full' ? IntlDateFormatter::LONG : IntlDateFormatter::MEDIUM),
-                                          IntlTimeZone::createTimeZone($this->hive['TZ'])
-                                      );
-                                      return $formatter->format($args[$pos]);
-                            } else {
-                                if (empty($mod) || $mod == 'short') {
-                                    $prop = '%X';
-                                } elseif ($mod != 'custom') {
-                                    $prop = '%r';
-                                }
-                                return strftime($prop, $args[$pos]);
-                            }
+                        case 'date':                            
+                            $lang = $this->split($this->LANGUAGE);
+                            // requires intl extension
+                            $dateType = (empty($mod) || $mod == 'short') ? IntlDateFormatter::SHORT :
+                                ($mod == 'full' ? IntlDateFormatter::FULL : IntlDateFormatter::LONG);
+                            $pattern = $dateType === IntlDateFormatter::SHORT
+                                ? (($ptn = \IntlDatePatternGenerator::create($lang[0]))
+                                    ? $ptn->getBestPattern('yyyyMMdd') : null) : null;
+                            $formatter = new \IntlDateFormatter(
+                                $lang[0],
+                                $dateType,
+                                IntlDateFormatter::NONE,
+                                null,
+                                null,
+                                $pattern
+                            );
+                            return $formatter->format($args[$pos]);
+                            
+                        case 'time':                            
+                            $lang = $this->split($this->LANGUAGE);
+                            // requires intl extension
+                            $formatter = new \IntlDateFormatter(
+                                $lang[0],
+                                IntlDateFormatter::NONE,
+                                (empty($mod) || $mod == 'short')
+                                ? IntlDateFormatter::SHORT :
+                                ($mod == 'full' ? IntlDateFormatter::LONG : IntlDateFormatter::MEDIUM),
+                                \IntlTimeZone::createTimeZone($this->hive['TZ'])
+                            );
+                            return $formatter->format($args[$pos]);
+                            
                         default:
                             return $expr[0];
                     }
@@ -2182,7 +2156,7 @@ class Base extends Prefab implements ArrayAccess
 
     /**
     *    Applies the specified URL mask and returns parameterized matches
-    *    @return $args array
+    *    @return array @args
     *    @param $pattern string
     *    @param $url string|NULL
     **/
@@ -2937,11 +2911,11 @@ class Base extends Prefab implements ArrayAccess
 
     /**
     *    Convenience method for checking hive key
-    *    @return mixed
-    *    @param $key string
+    *    @return bool
+    *    @param string $key
     **/
     #[\ReturnTypeWillChange]
-    public function offsetexists($key)
+    public function offsetExists($key) : bool
     {
         return $this->exists($key);
     }
@@ -2949,11 +2923,11 @@ class Base extends Prefab implements ArrayAccess
     /**
     *    Convenience method for assigning hive value
     *    @return mixed
-    *    @param $key string
-    *    @param $val mixed
+    *    @param string $key
+    *    @param mixed $val
     **/
     #[\ReturnTypeWillChange]
-    public function offsetset($key, $val)
+    public function offsetSet($key, $val) : mixed
     {
         return $this->set($key, $val);
     }
@@ -2964,7 +2938,7 @@ class Base extends Prefab implements ArrayAccess
     *    @param $key string
     **/
     #[\ReturnTypeWillChange]
-    public function &offsetget($key)
+    public function &offsetGet($key) : mixed
     {
         $val=&$this->ref($key);
         return $val;
@@ -2972,10 +2946,11 @@ class Base extends Prefab implements ArrayAccess
 
     /**
     *    Convenience method for removing hive key
-    *    @param $key string
+    *    @return void
+    *    @param string $key
     **/
-    #[\ReturnTypeWillChange]
-    public function offsetunset($key)
+    #[\ReturnTypeWillChange]    
+    public function offsetUnset($key) : void
     {
         $this->clear($key);
     }
@@ -2987,7 +2962,7 @@ class Base extends Prefab implements ArrayAccess
     **/
     public function __isset($key)
     {
-        return $this->offsetexists($key);
+        return $this->offsetExists($key);
     }
 
     /**
@@ -2998,7 +2973,7 @@ class Base extends Prefab implements ArrayAccess
     **/
     public function __set($key, $val)
     {
-        return $this->offsetset($key, $val);
+        return $this->offsetSet($key, $val);
     }
 
     /**
@@ -3008,7 +2983,7 @@ class Base extends Prefab implements ArrayAccess
     **/
     public function &__get($key)
     {
-        $val=&$this->offsetget($key);
+        $val=&$this->offsetGet($key);
         return $val;
     }
 
@@ -3018,7 +2993,7 @@ class Base extends Prefab implements ArrayAccess
     **/
     public function __unset($key)
     {
-        $this->offsetunset($key);
+        $this->offsetUnset($key);
     }
 
     /**

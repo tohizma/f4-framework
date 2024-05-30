@@ -43,8 +43,8 @@ class Session extends Magic
 
     /**
     *   Instantiate class
-    *   @param $onsuspect callback
-    *   @param $key string
+    *   @param callback $onsuspect
+    *   @param string $key
     **/
     public function __construct($onsuspect = null, $key = null, $cache = null)
     {
@@ -75,8 +75,8 @@ class Session extends Magic
     /**
     *   Open session
     *   @return TRUE
-    *   @param $path string
-    *   @param $name string
+    *   @param string $path
+    *   @param string $name
     **/
     public function open($path, $name)
     {
@@ -97,7 +97,7 @@ class Session extends Magic
     /**
     *   Return session data in serialized format
     *   @return string
-    *   @param $id string
+    *   @param string $id
     **/
     public function read($id)
     {
@@ -124,8 +124,8 @@ class Session extends Magic
     /**
     *   Write session data
     *   @return TRUE
-    *   @param $id string
-    *   @param $data string
+    *   @param string $id
+    *   @param string $data
     **/
     public function write($id, $data)
     {
@@ -147,7 +147,7 @@ class Session extends Magic
     /**
     *   Destroy session
     *   @return TRUE
-    *   @param $id string
+    *   @param string $id
     **/
     public function destroy($id)
     {
@@ -158,7 +158,7 @@ class Session extends Magic
     /**
     *   Garbage collector
     *   @return TRUE
-    *   @param $max int
+    *   @param int $max
     **/
     public function cleanup($max)
     {

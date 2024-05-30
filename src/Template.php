@@ -59,7 +59,7 @@ class Template extends Preview
     /**
     *   Template -set- tag handler
     *   @return string
-    *   @param $node array
+    *   @param array $node
     **/
     protected function set(array $node)
     {
@@ -76,7 +76,7 @@ class Template extends Preview
     /**
     *   Template -include- tag handler
     *   @return string
-    *   @param $node array
+    *   @param array $node
     **/
     protected function include(array $node)
     {
@@ -125,7 +125,7 @@ class Template extends Preview
     /**
     *   Template -ignore- tag handler
     *   @return string
-    *   @param $node array
+    *   @param array $node
     **/
     protected function ignore(array $node)
     {
@@ -135,7 +135,7 @@ class Template extends Preview
     /**
     *   Template -loop- tag handler
     *   @return string
-    *   @param $node array
+    *   @param array $node
     **/
     protected function loop(array $node)
     {
@@ -153,7 +153,7 @@ class Template extends Preview
     /**
     *   Template -repeat- tag handler
     *   @return string
-    *   @param $node array
+    *   @param array $node
     **/
     protected function repeat(array $node)
     {
@@ -176,7 +176,7 @@ class Template extends Preview
     /**
     *   Template -check- tag handler
     *   @return string
-    *   @param $node array
+    *   @param array $node
     **/
     protected function check(array $node)
     {
@@ -203,7 +203,7 @@ class Template extends Preview
     /**
     *   Template -true- tag handler
     *   @return string
-    *   @param $node array
+    *   @param array $node
     **/
     protected function true(array $node)
     {
@@ -213,7 +213,7 @@ class Template extends Preview
     /**
     *   Template -false- tag handler
     *   @return string
-    *   @param $node array
+    *   @param array $node
     **/
     protected function false(array $node)
     {
@@ -223,7 +223,7 @@ class Template extends Preview
     /**
     *   Template -switch- tag handler
     *   @return string
-    *   @param $node array
+    *   @param array $node
     **/
     protected function switch(array $node)
     {
@@ -243,7 +243,7 @@ class Template extends Preview
     /**
     *   Template -case- tag handler
     *   @return string
-    *   @param $node array
+    *   @param array $node
     **/
     protected function case(array $node)
     {
@@ -262,7 +262,7 @@ class Template extends Preview
     /**
     *   Template -default- tag handler
     *   @return string
-    *   @param $node array
+    *   @param array $node
     **/
     protected function default(array $node)
     {
@@ -275,7 +275,7 @@ class Template extends Preview
     /**
     *   Assemble markup
     *   @return string
-    *   @param $node array|string
+    *   @param array|string $node
     **/
     public function build($node)
     {
@@ -292,8 +292,8 @@ class Template extends Preview
     /**
     *   Extend template with custom tag
     *   @return NULL
-    *   @param $tag string
-    *   @param $func callback
+    *   @param string $tag
+    *   @param callback $func
     **/
     public function extend($tag, $func)
     {
@@ -304,8 +304,8 @@ class Template extends Preview
     /**
     *   Call custom tag handler
     *   @return string|FALSE
-    *   @param $func string
-    *   @param $args array
+    *   @param string $func
+    *   @param array $args
     **/
     public function __call($func, array $args)
     {
@@ -321,7 +321,7 @@ class Template extends Preview
     /**
     *   Parse string for template directives and tokens
     *   @return array
-    *   @param $text string
+    *   @param string $text
     **/
     public function parse($text)
     {

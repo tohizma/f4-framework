@@ -37,11 +37,11 @@ class Agent
     protected $headers;
 
     /**
-    *   @param $server WS
-    *   @param $socket resource
-    *   @param $verb string
-    *   @param $uri string
-    *   @param $hdrs array
+    *   @param WS $server
+    *   @param resource $socket
+    *   @param string $verb
+    *   @param string $uri
+    *   @param array $hdrs
     **/
     public function __construct($server, $socket, $verb, $uri, array $hdrs)
     {
@@ -128,8 +128,8 @@ class Agent
     /**
     *   Frame and transmit payload
     *   @return string|FALSE
-    *   @param $op int
-    *   @param $data string
+    *   @param int $op
+    *   @param string $data
     **/
     public function send($op, $data = '')
     {

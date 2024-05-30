@@ -23,6 +23,7 @@
 namespace F4\Web;
 
 use F4\Magic;
+use F4\Web;
 
 //! Lightweight OAuth2 client
 class OAuth2 extends Magic
@@ -35,28 +36,28 @@ class OAuth2 extends Magic
     /**
     *   Return OAuth2 authentication URI
     *   @return string
-    *   @param $endpoint string
-    *   @param $query bool
+    *   @param string $endpoint
+    *   @param bool $query
     **/
     public function uri($endpoint, $query = true)
     {
         return $endpoint . ($query ? ('?' .
-                http_build_query($this->args, null, '&', $this->enc_type)) : '');
+                http_build_query($this->args, '', '&', $this->enc_type)) : '');
     }
 
     /**
     *   Send request to API/token endpoint
     *   @return string|array|FALSE
-    *   @param $uri string
-    *   @param $method string
-    *   @param $token string
+    *   @param string $uri
+    *   @param string $method
+    *   @param string $token
     **/
     public function request($uri, $method, $token = null)
     {
         $web = Web::instance();
         $options = [
             'method' => $method,
-            'content' => http_build_query($this->args, null, '&', $this->enc_type),
+            'content' => http_build_query($this->args, '', '&', $this->enc_type),
             'header' => ['Accept: application/json']
         ];
         if ($token) {
@@ -96,7 +97,7 @@ class OAuth2 extends Magic
     /**
     *   Parse JSON Web token
     *   @return array
-    *   @param $token string
+    *   @param string $token
     **/
     public function jwt($token)
     {
@@ -120,7 +121,7 @@ class OAuth2 extends Magic
     /**
     *   URL-safe base64 encoding
     *   @return array
-    *   @param $data string
+    *   @param string $data
     **/
     public function b64url($data)
     {
@@ -130,7 +131,7 @@ class OAuth2 extends Magic
     /**
     *   Return TRUE if scope/claim exists
     *   @return bool
-    *   @param $key string
+    *   @param string $key
     **/
     public function exists($key)
     {
@@ -140,8 +141,8 @@ class OAuth2 extends Magic
     /**
     *   Bind value to scope/claim
     *   @return string
-    *   @param $key string
-    *   @param $val string
+    *   @param string $key
+    *   @param string $val
     **/
     public function set($key, $val)
     {
@@ -151,7 +152,7 @@ class OAuth2 extends Magic
     /**
     *   Return value of scope/claim
     *   @return mixed
-    *   @param $key string
+    *   @param string $key
     **/
     public function &get($key)
     {
@@ -166,7 +167,7 @@ class OAuth2 extends Magic
     /**
     *   Remove scope/claim
     *   @return NULL
-    *   @param $key string
+    *   @param string $key
     **/
     public function clear($key = null)
     {

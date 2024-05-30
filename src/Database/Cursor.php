@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace F4\Database;
 
 use F4\Magic;
+use Traversable;
 
 //! Simple cursor implementation
 abstract class Cursor extends Magic implements \IteratorAggregate
@@ -56,25 +57,25 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Return fields of mapper object as an associative array
     *   @return array
-    *   @param $obj object
+    *   @param object $obj
     **/
     abstract public function cast($obj = null);
 
     /**
     *   Return records (array of mapper objects) that match criteria
     *   @return array
-    *   @param $filter string|array
-    *   @param $options array
-    *   @param $ttl int
+    *   @param string|array $filter
+    *   @param array $options
+    *   @param int $ttl
     **/
     abstract public function find($filter = null, array $options = null, $ttl = 0);
 
     /**
     *   Count records that match criteria
     *   @return int
-    *   @param $filter array
-    *   @param $options array
-    *   @param $ttl int
+    *   @param array $filter
+    *   @param array $options
+    *   @param int $ttl
     **/
     abstract public function count($filter = null, array $options = null, $ttl = 0);
 
@@ -93,15 +94,15 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Hydrate mapper object using hive array variable
     *   @return NULL
-    *   @param $var array|string
-    *   @param $func callback
+    *   @param array|string $var
+    *   @param callback $func
     **/
     abstract public function copyfrom($var, $func = null);
 
     /**
     *   Populate hive array variable with mapper fields
     *   @return NULL
-    *   @param $key string
+    *   @param string $key
     **/
     abstract public function copyto($key);
 
@@ -111,7 +112,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     *   return ArrayIterator
     **/
     #[\ReturnTypeWillChange]
-    abstract public function getiterator();
+    abstract public function getiterator() : Traversable;
 
 
     /**
@@ -126,9 +127,9 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Return first record (mapper object) that matches criteria
     *   @return static|FALSE
-    *   @param $filter string|array
-    *   @param $options array
-    *   @param $ttl int
+    *   @param string|array $filter
+    *   @param array $options
+    *   @param int $ttl
     **/
     public function findone($filter = null, array $options = null, $ttl = 0)
     {
@@ -145,12 +146,12 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     *   total number of records in superset, specified limit, number of
     *   subsets available, and actual subset position
     *   @return array
-    *   @param $pos int
-    *   @param $size int
-    *   @param $filter string|array
-    *   @param $options array
-    *   @param $ttl int
-    *   @param $bounce bool
+    *   @param int $pos
+    *   @param int $size
+    *   @param string|array $filter
+    *   @param array $options
+    *   @param int $ttl
+    *   @param bool $bounce
     **/
     public function paginate(
         $pos = 0,
@@ -184,9 +185,9 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Map to first record that matches criteria
     *   @return array|FALSE
-    *   @param $filter string|array
-    *   @param $options array
-    *   @param $ttl int
+    *   @param string|array $filter
+    *   @param array $options
+    *   @param int $ttl
     **/
     public function load($filter = null, array $options = null, $ttl = 0)
     {
@@ -225,7 +226,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Map to nth record relative to current cursor position
     *   @return mixed
-    *   @param $ofs int
+    *   @param int $ofs
     **/
     public function skip($ofs = 1)
     {
@@ -283,7 +284,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define onload trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function onload($func)
     {
@@ -293,7 +294,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define beforeinsert trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function beforeinsert($func)
     {
@@ -303,7 +304,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define afterinsert trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function afterinsert($func)
     {
@@ -313,7 +314,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define oninsert trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function oninsert($func)
     {
@@ -323,7 +324,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define beforeupdate trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function beforeupdate($func)
     {
@@ -333,7 +334,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define afterupdate trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function afterupdate($func)
     {
@@ -343,7 +344,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define onupdate trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function onupdate($func)
     {
@@ -353,7 +354,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define beforesave trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function beforesave($func)
     {
@@ -365,7 +366,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define aftersave trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function aftersave($func)
     {
@@ -377,7 +378,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define onsave trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function onsave($func)
     {
@@ -387,7 +388,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define beforeerase trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function beforeerase($func)
     {
@@ -397,7 +398,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define aftererase trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function aftererase($func)
     {
@@ -407,7 +408,7 @@ abstract class Cursor extends Magic implements \IteratorAggregate
     /**
     *   Define onerase trigger
     *   @return callback
-    *   @param $func callback
+    *   @param callback $func
     **/
     public function onerase($func)
     {

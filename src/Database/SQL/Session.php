@@ -42,12 +42,12 @@ class Session extends Mapper
 
     /**
     *   Instantiate class
-    *   @param $db \DB\SQL
-    *   @param $table string
-    *   @param $force bool
-    *   @param $onsuspect callback
-    *   @param $key string
-    *   @param $type string, column type for data field
+    *   @param SQL $db
+    *   @param string $table
+    *   @param bool $force
+    *   @param callback $onsuspect
+    *   @param string $key
+    *   @param string $type column type for data field
     **/
     public function __construct(SQL $db, $table = 'sessions', $force = true, $onsuspect = null, $key = null, $type = 'TEXT')
     {
@@ -105,8 +105,8 @@ class Session extends Mapper
     /**
     *   Open session
     *   @return TRUE
-    *   @param $path string
-    *   @param $name string
+    *   @param string $path
+    *   @param string $name
     **/
     public function open($path, $name)
     {
@@ -127,7 +127,7 @@ class Session extends Mapper
     /**
     *   Return session data in serialized format
     *   @return string
-    *   @param $id string
+    *   @param string $id
     **/
     public function read($id)
     {
@@ -153,8 +153,8 @@ class Session extends Mapper
     /**
     *   Write session data
     *   @return TRUE
-    *   @param $id string
-    *   @param $data string
+    *   @param string $id
+    *   @param string $data
     **/
     public function write($id, $data)
     {
@@ -170,7 +170,7 @@ class Session extends Mapper
     /**
     *   Destroy session
     *   @return TRUE
-    *   @param $id string
+    *   @param string $id
     **/
     public function destroy($id)
     {
@@ -181,7 +181,7 @@ class Session extends Mapper
     /**
     *   Garbage collector
     *   @return TRUE
-    *   @param $max int
+    *   @param int $max
     **/
     public function cleanup($max)
     {

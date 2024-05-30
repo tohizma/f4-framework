@@ -47,9 +47,9 @@ class Mongo
 
     /**
     *   Instantiate class
-    *   @param $dsn string
-    *   @param $dbname string
-    *   @param $options array
+    *   @param string $dsn
+    *   @param string $dbname
+    *   @param array $options
     **/
     public function __construct($dsn, $dbname, array $options = null)
     {
@@ -83,7 +83,7 @@ class Mongo
 
     /**
     *   Return MongoDB profiler results (or disable logging)
-    *   @param $flag bool
+    *   @param bool $flag
     *   @return string
     **/
     public function log($flag = true)
@@ -93,7 +93,7 @@ class Mongo
             foreach (iterator_to_array($cursor) as $frame) {
                 if (!preg_match('/\.system\..+$/', $frame['ns'])) {
                     $this->log .= date('r', $this->legacy() ?
-                    $frame['ts']->sec : (round((string)$frame['ts']) / 1000)) .
+                    $frame['ts']->sec : (round((float)$frame['ts']) / 1000)) .
                         ' (' . sprintf('%.1f', $frame['millis']) . 'ms) ' .
                         $frame['ns'] . ' [' . $frame['op'] . '] ' .
                         (empty($frame['query']) ?
@@ -134,8 +134,8 @@ class Mongo
     /**
     *   Redirect call to MongoDB object
     *   @return mixed
-    *   @param $func string
-    *   @param $args array
+    *   @param string $func
+    *   @param array $args
     **/
     public function __call($func, array $args)
     {

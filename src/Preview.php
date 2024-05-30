@@ -23,7 +23,7 @@ class Preview extends View
     /**
      * Enable/disable markup parsing interpolation
      * mainly used for adding appropriate newlines
-     * @param $bool bool
+     * @param bool $bool
      */
     public function interpolation($bool)
     {
@@ -33,7 +33,7 @@ class Preview extends View
     /**
     *   Return C-locale equivalent of number
     *   @return string
-    *   @param $val int|float
+    *   @param int|float $val
     **/
     public function c($val)
     {
@@ -47,7 +47,7 @@ class Preview extends View
     /**
     *   Convert token to variable
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     public function token($str)
     {
@@ -92,7 +92,7 @@ class Preview extends View
     /**
     *   Assemble markup
     *   @return string
-    *   @param $node string
+    *   @param string $node
     **/
     protected function build($node)
     {
@@ -123,11 +123,11 @@ class Preview extends View
     /**
     *   Render template string
     *   @return string
-    *   @param $node string|array
-    *   @param $hive array
-    *   @param $ttl int
-    *   @param $persist bool
-    *   @param $escape bool
+    *   @param string|array $node
+    *   @param array $hive
+    *   @param int $ttl
+    *   @param bool $persist
+    *   @param bool $escape
     **/
     public function resolve($node, array $hive = null, $ttl = 0, $persist = false, $escape = null)
     {
@@ -185,7 +185,7 @@ class Preview extends View
     /**
      *  Parse template string
      *  @return string
-     *  @param $text string
+     *  @param string $text
      **/
     public function parse($text)
     {
@@ -201,10 +201,10 @@ class Preview extends View
     /**
     *   Render template
     *   @return string
-    *   @param $file string
-    *   @param $mime string
-    *   @param $hive array
-    *   @param $ttl int
+    *   @param string $file
+    *   @param string $mime
+    *   @param array $hive
+    *   @param int $ttl
     **/
     public function render($file, $mime = 'text/html', array $hive = null, $ttl = 0)
     {
@@ -254,7 +254,7 @@ class Preview extends View
 
     /**
      *  post rendering handler
-     *  @param $func callback
+     *  @param callback $func
      */
     public function beforerender($func)
     {

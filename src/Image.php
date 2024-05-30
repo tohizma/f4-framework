@@ -56,9 +56,9 @@ class Image
 
     /**
     *   Instantiate image
-    *   @param $file string
-    *   @param $flag bool
-    *   @param $path string
+    *   @param string $file
+    *   @param bool $flag
+    *   @param string $path
     **/
     public function __construct($file = null, $flag = false, $path = null)
     {
@@ -86,7 +86,7 @@ class Image
     public function __destruct()
     {
         if (is_resource($this->data)) {
-            imagedestroy($this->data);
+            imagedestroy($this->data); 
             $fw = Base::instance();
             $path = $fw->TEMP . $fw->SEED . '.' . $fw->hash($this->file);
             if ($glob = @glob($path . '*.png', GLOB_NOSORT)) {
@@ -102,7 +102,7 @@ class Image
     /**
     *   Convert RGB hex triad to array
     *   @return array|FALSE
-    *   @param $color int|string
+    *   @param int|string $color
     **/
     public function rgb($color)
     {
@@ -134,7 +134,7 @@ class Image
     /**
     *   Adjust brightness (range:-255 to 255)
     *   @return object
-    *   @param $level int
+    *   @param int $level
     **/
     public function brightness($level)
     {
@@ -145,7 +145,7 @@ class Image
     /**
     *   Adjust contrast (range:-100 to 100)
     *   @return object
-    *   @param $level int
+    *   @param int $level
     **/
     public function contrast($level)
     {
@@ -166,7 +166,7 @@ class Image
     /**
     *   Adjust smoothness
     *   @return object
-    *   @param $level int
+    *   @param int $level
     **/
     public function smooth($level)
     {
@@ -198,7 +198,7 @@ class Image
     /**
     *   Pixelate the image
     *   @return object
-    *   @param $size int
+    *   @param int $size
     **/
     public function pixelate($size)
     {
@@ -209,7 +209,7 @@ class Image
     /**
     *   Blur the image using Gaussian filter
     *   @return object
-    *   @param $selective bool
+    *   @param bool $selective
     **/
     public function blur($selective = false)
     {
@@ -291,10 +291,10 @@ class Image
     /**
     *   Crop the image
     *   @return object
-    *   @param $x1 int
-    *   @param $y1 int
-    *   @param $x2 int
-    *   @param $y2 int
+    *   @param int $x1
+    *   @param int $y1
+    *   @param int $x2
+    *   @param int $y2
     **/
     public function crop($x1, $y1, $x2, $y2)
     {
@@ -322,10 +322,10 @@ class Image
     *   Resize image (Maintain aspect ratio); Crop relative to center
     *   if flag is enabled; Enlargement allowed if flag is enabled
     *   @return object
-    *   @param $width int
-    *   @param $height int
-    *   @param $crop bool
-    *   @param $enlarge bool
+    *   @param int $width
+    *   @param int $height
+    *   @param bool $crop
+    *   @param bool $enlarge
     **/
     public function resize($width = null, $height = null, $crop = true, $enlarge = true)
     {
@@ -360,13 +360,13 @@ class Image
         // Resize
         if ($crop) {
             if ($width / $ratio <= $height) {
-                $cropw = round($origh * $width / $height);
+                $cropw = (int) round($origh * $width / $height);
                 imagecopyresampled(
                     $tmp,
                     $this->data,
                     0,
                     0,
-                    round(($origw - $cropw) / 2),
+                    (int) round(($origw - $cropw) / 2),
                     0,
                     $width,
                     $height,
@@ -374,14 +374,14 @@ class Image
                     $origh
                 );
             } else {
-                $croph = round($origw * $height / $width);
+                $croph = (int) round($origw * $height / $width);
                 imagecopyresampled(
                     $tmp,
                     $this->data,
                     0,
                     0,
                     0,
-                    round(($origh - $croph) / 2),
+                    (int) round(($origh - $croph) / 2),
                     $width,
                     $height,
                     $origw,
@@ -410,7 +410,7 @@ class Image
     /**
     *   Rotate image
     *   @return object
-    *   @param $angle int
+    *   @param int $angle
     **/
     public function rotate($angle)
     {
@@ -426,9 +426,9 @@ class Image
     /**
     *   Apply an image overlay
     *   @return object
-    *   @param $img object
-    *   @param $align int|array
-    *   @param $alpha int
+    *   @param object $img
+    *   @param int|array $align
+    *   @param int $alpha
     **/
     public function overlay(Image $img, $align = null, $alpha = 100)
     {
@@ -493,9 +493,9 @@ class Image
     /**
     *   Generate identicon
     *   @return object
-    *   @param $str string
-    *   @param $size int
-    *   @param $blocks int
+    *   @param string $str
+    *   @param int $size
+    *   @param int $blocks
     **/
     public function identicon($str, $size = 64, $blocks = 4)
     {
@@ -541,12 +541,12 @@ class Image
                     imagecopyresampled(
                         $this->data,
                         $sprite,
-                        round($i * $dim / 2),
-                        round($j * $dim / 2),
+                        (int) round($i * $dim / 2),
+                        (int) round($j * $dim / 2),
                         0,
                         0,
-                        round($dim / 2),
-                        round($dim / 2),
+                        (int) round($dim / 2),
+                        (int) round($dim / 2),
                         $dim,
                         $dim
                     );
@@ -566,13 +566,13 @@ class Image
     /**
     *   Generate CAPTCHA image
     *   @return object|FALSE
-    *   @param $font string
-    *   @param $size int
-    *   @param $len int
-    *   @param $key string
-    *   @param $path string
-    *   @param $fg int
-    *   @param $bg int
+    *   @param string $font
+    *   @param int $size
+    *   @param int $len
+    *   @param string $key
+    *   @param string $path
+    *   @param int $fg
+    *   @param int $bg
     **/
     public function captcha(
         $font,
@@ -611,8 +611,8 @@ class Image
                         $char,
                         $size * 2,
                         0,
-                        round(($block - $w) / 2),
-                        round($block - ($block - $h) / 2),
+                        (int) round(($block - $w) / 2),
+                        (int) round($block - ($block - $h) / 2),
                         $fg,
                         $path,
                         $seed[$i]
@@ -624,8 +624,8 @@ class Image
                     );
                     // Reduce to normal size
                     $tmp[$i] = imagecreatetruecolor(
-                        round(($w = imagesx($char)) / 2),
-                        round(($h = imagesy($char)) / 2)
+                        (int) round(($w = imagesx($char)) / 2),
+                        (int) round(($h = imagesy($char)) / 2)
                     );
                     imagefill($tmp[$i], 0, 0, IMG_COLOR_TRANSPARENT);
                     imagecopyresampled(
@@ -635,8 +635,8 @@ class Image
                         0,
                         0,
                         0,
-                        round($w / 2),
-                        round($h / 2),
+                        (int) round($w / 2),
+                        (int) round($h / 2),
                         $w,
                         $h
                     );
@@ -644,14 +644,14 @@ class Image
                     $width += $i + 1 < $len ? $block / 2 : $w / 2;
                     $height = max($height, $h / 2);
                 }
-                $this->data = imagecreatetruecolor(round($width), round($height));
+                $this->data = imagecreatetruecolor((int) round($width), (int) round($height));
                 imagefill($this->data, 0, 0, IMG_COLOR_TRANSPARENT);
                 for ($i = 0; $i < $len; ++$i) {
                     imagecopy(
                         $this->data,
                         $tmp[$i],
-                        round($i * $block / 2),
-                        round(($height - imagesy($tmp[$i])) / 2),
+                        (int) round($i * $block / 2),
+                        (int) round(($height - imagesy($tmp[$i])) / 2),
                         0,
                         0,
                         imagesx($tmp[$i]),
@@ -755,7 +755,7 @@ class Image
     /**
     *   Revert to specified state
     *   @return object
-    *   @param $state int
+    *   @param int $state
     **/
     public function restore($state = 1)
     {
@@ -798,7 +798,7 @@ class Image
     /**
     *   Load string
     *   @return object|FALSE
-    *   @param $str string
+    *   @param string $str
     **/
     public function load($str)
     {

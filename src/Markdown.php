@@ -34,7 +34,7 @@ class Markdown extends Prefab
     /**
     *   Process blockquote
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function blockquote($str)
     {
@@ -46,7 +46,7 @@ class Markdown extends Prefab
     /**
     *   Process whitespace-prefixed code block
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function pre($str)
     {
@@ -65,8 +65,8 @@ class Markdown extends Prefab
     /**
     *   Process fenced code block
     *   @return string
-    *   @param $hint string
-    *   @param $str string
+    *   @param string $hint
+    *   @param string $str
     **/
     protected function fence($hint, $str)
     {
@@ -211,8 +211,8 @@ class Markdown extends Prefab
     /**
     *   Process atx-style heading
     *   @return string
-    *   @param $type string
-    *   @param $str string
+    *   @param string $type
+    *   @param string $str
     **/
     protected function atx($type, $str)
     {
@@ -224,8 +224,8 @@ class Markdown extends Prefab
     /**
     *   Process setext-style heading
     *   @return string
-    *   @param $str string
-    *   @param $type string
+    *   @param string $str
+    *   @param string $type
     **/
     protected function setext($str, $type)
     {
@@ -237,7 +237,7 @@ class Markdown extends Prefab
     /**
     *   Process ordered/unordered list
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function li($str)
     {
@@ -310,7 +310,7 @@ class Markdown extends Prefab
     /**
     *   Ignore raw HTML
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function raw($str)
     {
@@ -320,7 +320,7 @@ class Markdown extends Prefab
     /**
     *   Process paragraph
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function p($str)
     {
@@ -358,7 +358,7 @@ class Markdown extends Prefab
     /**
     *   Process strong/em/strikethrough spans
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function text($str)
     {
@@ -388,7 +388,7 @@ class Markdown extends Prefab
     /**
     *   Process image span
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function img($str)
     {
@@ -410,7 +410,7 @@ class Markdown extends Prefab
     /**
     *   Process anchor span
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function a($str)
     {
@@ -430,7 +430,7 @@ class Markdown extends Prefab
     /**
     *   Auto-convert links
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function auto($str)
     {
@@ -450,7 +450,7 @@ class Markdown extends Prefab
     /**
     *   Process code span
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function code($str)
     {
@@ -467,7 +467,7 @@ class Markdown extends Prefab
     /**
     *   Convert characters to HTML entities
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     public function esc($str)
     {
@@ -493,7 +493,7 @@ class Markdown extends Prefab
     /**
     *   Reduce multiple line feeds
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function snip($str)
     {
@@ -503,7 +503,7 @@ class Markdown extends Prefab
     /**
     *   Scan line for convertible spans
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     public function scan($str)
     {
@@ -517,7 +517,7 @@ class Markdown extends Prefab
     /**
     *   Assemble blocks
     *   @return string
-    *   @param $str string
+    *   @param string $str
     **/
     protected function build($str)
     {
@@ -614,7 +614,7 @@ class Markdown extends Prefab
     /**
     *   Render HTML equivalent of markdown
     *   @return string
-    *   @param $txt string
+    *   @param string $txt
     **/
     public function convert($txt)
     {

@@ -30,8 +30,8 @@ class Matrix extends Prefab
     *   Retrieve values from a specified column of a multi-dimensional
     *   array variable
     *   @return array
-    *   @param $var array
-    *   @param $col mixed
+    *   @param array $var
+    *   @param mixed $col
     **/
     public function pick(array $var, $col)
     {
@@ -75,8 +75,8 @@ class Matrix extends Prefab
 
     /**
     *   Rotate a two-dimensional array variable
-    *   @return NULL
-    *   @param $var array
+    *   @return void
+    *   @param array $var
     **/
     public function transpose(array &$var)
     {
@@ -92,9 +92,9 @@ class Matrix extends Prefab
     /**
     *   Sort a multi-dimensional array variable on a specified column
     *   @return bool
-    *   @param $var array
-    *   @param $col mixed
-    *   @param $order int
+    *   @param array $var
+    *   @param mixed $col
+    *   @param int $order
     **/
     public function sort(array &$var, $col, $order = SORT_ASC)
     {
@@ -115,10 +115,10 @@ class Matrix extends Prefab
 
     /**
     *   Change the key of a two-dimensional array element
-    *   @return NULL
-    *   @param $var array
-    *   @param $old string
-    *   @param $new string
+    *   @return void
+    *   @param array $var
+    *   @param string $old
+    *   @param string $new
     **/
     public function changekey(array &$var, $old, $new)
     {
@@ -132,8 +132,8 @@ class Matrix extends Prefab
     *   Return month calendar of specified date, with optional setting for
     *   first day of week (0 for Sunday)
     *   @return array
-    *   @param $date string|int
-    *   @param $first int
+    *   @param string|int $date
+    *   @param int $first
     **/
     public function calendar($date = 'now', $first = 0)
     {

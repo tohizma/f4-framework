@@ -28,7 +28,7 @@ class View extends Prefab
     /**
     *   Encode characters to equivalent HTML entities
     *   @return string
-    *   @param $arg mixed
+    *   @param mixed $arg
     **/
     public function esc($arg)
     {
@@ -43,7 +43,7 @@ class View extends Prefab
     /**
     *   Decode HTML entities to equivalent characters
     *   @return string
-    *   @param $arg mixed
+    *   @param mixed $arg
     **/
     public function raw($arg)
     {
@@ -58,8 +58,8 @@ class View extends Prefab
     /**
     *   Create sandbox for template execution
     *   @return string
-    *   @param $hive array
-    *   @param $mime string
+    *   @param array $hive
+    *   @param string $mime
     **/
     protected function sandbox(array $hive = null, $mime = null)
     {
@@ -99,10 +99,10 @@ class View extends Prefab
     /**
     *   Render template
     *   @return string
-    *   @param $file string
-    *   @param $mime string
-    *   @param $hive array
-    *   @param $ttl int
+    *   @param string $file
+    *   @param string $mime
+    *   @param array $hive
+    *   @param int $ttl
     **/
     public function render($file, $mime = 'text/html', array $hive = null, $ttl = 0)
     {
@@ -136,7 +136,7 @@ class View extends Prefab
 
     /**
     *   post rendering handler
-    *   @param $func callback
+    *   @param callback $func
     */
     public function afterrender($func)
     {

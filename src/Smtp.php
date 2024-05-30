@@ -58,12 +58,12 @@ class Smtp extends Magic
 
     /**
     *   Instantiate class
-    *   @param $host string
-    *   @param $port int
-    *   @param $scheme string
-    *   @param $user string
-    *   @param $pw string
-    *   @param $ctx resource
+    *   @param string $host
+    *   @param int $port
+    *   @param string $scheme
+    *   @param string $user
+    *   @param string $pw
+    *   @param resource $ctx
     **/
     public function __construct(
         $host = 'localhost',
@@ -89,7 +89,7 @@ class Smtp extends Magic
     /**
     *   Fix header
     *   @return string
-    *   @param $key string
+    *   @param string $key
     **/
     protected function fixheader($key)
     {
@@ -103,7 +103,7 @@ class Smtp extends Magic
     /**
     *   Return TRUE if header exists
     *   @return bool
-    *   @param $key
+    *   @param string $key
     **/
     public function exists($key)
     {
@@ -114,8 +114,8 @@ class Smtp extends Magic
     /**
     *   Bind value to e-mail header
     *   @return string
-    *   @param $key string
-    *   @param $val string
+    *   @param string $key
+    *   @param string $val
     **/
     public function set($key, $val)
     {
@@ -126,7 +126,7 @@ class Smtp extends Magic
     /**
     *   Return value of e-mail header
     *   @return string|NULL
-    *   @param $key string
+    *   @param string $key
     **/
     public function &get($key)
     {
@@ -142,7 +142,7 @@ class Smtp extends Magic
     /**
     *   Remove header
     *   @return NULL
-    *   @param $key string
+    *   @param string $key
     **/
     public function clear($key)
     {
@@ -162,9 +162,9 @@ class Smtp extends Magic
     /**
     *   Send SMTP command and record server response
     *   @return string
-    *   @param $cmd string
-    *   @param $log bool|string
-    *   @param $mock bool
+    *   @param string $cmd
+    *   @param bool|string $log
+    *   @param bool $mock
     **/
     protected function dialog($cmd = null, $log = true, $mock = false)
     {
@@ -214,9 +214,9 @@ class Smtp extends Magic
     /**
     *   Add e-mail attachment
     *   @return NULL
-    *   @param $file string
-    *   @param $alias string
-    *   @param $cid string
+    *   @param string $file
+    *   @param string $alias
+    *   @param string $cid
     **/
     public function attach($file, $alias = null, $cid = null)
     {
@@ -232,9 +232,9 @@ class Smtp extends Magic
     /**
     *   Transmit message
     *   @return bool
-    *   @param $message string
-    *   @param $log bool|string
-    *   @param $mock bool
+    *   @param string $message
+    *   @param bool|string $log
+    *   @param bool $mock
     **/
     public function send($message, $log = true, $mock = false)
     {

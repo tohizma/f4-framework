@@ -38,7 +38,7 @@ class OpenID extends Magic
     /**
     *   Determine OpenID provider
     *   @return string|FALSE
-    *   @param $proxy string
+    *   @param string $proxy
     **/
     protected function discover($proxy)
     {
@@ -165,9 +165,9 @@ class OpenID extends Magic
     *   Initiate OpenID authentication sequence; Return FALSE on failure
     *   or redirect to OpenID provider URL
     *   @return bool
-    *   @param $proxy string
-    *   @param $attr array
-    *   @param $reqd string|array
+    *   @param string $proxy
+    *   @param array $attr
+    *   @param string|array $reqd
     **/
     public function auth($proxy = null, $attr = [], array $reqd = null)
     {
@@ -202,7 +202,7 @@ class OpenID extends Magic
     /**
     *   Return TRUE if OpenID verification was successful
     *   @return bool
-    *   @param $proxy string
+    *   @param string $proxy
     **/
     public function verified($proxy = null)
     {
@@ -249,7 +249,7 @@ class OpenID extends Magic
     /**
     *   Return TRUE if OpenID request parameter exists
     *   @return bool
-    *   @param $key string
+    *   @param string $key
     **/
     public function exists($key)
     {
@@ -259,8 +259,8 @@ class OpenID extends Magic
     /**
     *   Bind value to OpenID request parameter
     *   @return string
-    *   @param $key string
-    *   @param $val string
+    *   @param string $key
+    *   @param string $val
     **/
     public function set($key, $val)
     {
@@ -270,7 +270,7 @@ class OpenID extends Magic
     /**
     *   Return value of OpenID request parameter
     *   @return mixed
-    *   @param $key string
+    *   @param string $key
     **/
     public function &get($key)
     {

@@ -31,39 +31,39 @@ abstract class Magic implements ArrayAccess
     /**
     *   Return TRUE if key is not empty
     *   @return bool
-    *   @param $key string
+    *   @param string $key
     **/
     abstract public function exists($key);
 
     /**
     *   Bind value to key
     *   @return mixed
-    *   @param $key string
-    *   @param $val mixed
+    *   @param string $key
+    *   @param mixed $val
     **/
     abstract public function set($key, $val);
 
     /**
     *   Retrieve contents of key
     *   @return mixed
-    *   @param $key string
+    *   @param string $key
     **/
     abstract public function &get($key);
 
     /**
     *   Unset key
     *   @return NULL
-    *   @param $key string
+    *   @param string $key
     **/
     abstract public function clear($key);
 
     /**
     *   Convenience method for checking property value
     *   @return mixed
-    *   @param $key string
+    *   @param string $key
     **/
     #[\ReturnTypeWillChange]
-    public function offsetexists($key)
+    public function offsetExists($key)
     {
         return Base::instance()->visible($this, $key) ?
             isset($this->$key) :
@@ -73,11 +73,11 @@ abstract class Magic implements ArrayAccess
     /**
     *   Convenience method for assigning property value
     *   @return mixed
-    *   @param $key string
-    *   @param $val mixed
+    *   @param string $key
+    *   @param mixed $val
     **/
     #[\ReturnTypeWillChange]
-    public function offsetset($key, $val)
+    public function offsetSet($key, $val)
     {
         return Base::instance()->visible($this, $key) ?
             ($this->$key = $val) : $this->set($key, $val);
@@ -86,10 +86,10 @@ abstract class Magic implements ArrayAccess
     /**
     *   Convenience method for retrieving property value
     *   @return mixed
-    *   @param $key string
+    *   @param string $key
     **/
     #[\ReturnTypeWillChange]
-    public function &offsetget($key)
+    public function &offsetGet($key)
     {
         if (Base::instance()->visible($this, $key)) {
             $val=&$this->$key;
@@ -101,11 +101,11 @@ abstract class Magic implements ArrayAccess
 
     /**
     *   Convenience method for removing property value
-    *   @return NULL
-    *   @param $key string
+    *   @return void
+    *   @param string $key
     **/
     #[\ReturnTypeWillChange]
-    public function offsetunset($key)
+    public function offsetUnset($key) : void
     {
         if (Base::instance()->visible($this, $key)) {
             unset($this->$key);
@@ -117,41 +117,41 @@ abstract class Magic implements ArrayAccess
     /**
     *   Alias for offsetexists()
     *   @return mixed
-    *   @param $key string
+    *   @param string $key
     **/
     public function __isset($key)
     {
-        return $this->offsetexists($key);
+        return $this->offsetExists($key);
     }
 
     /**
     *   Alias for offsetset()
     *   @return mixed
-    *   @param $key string
-    *   @param $val mixed
+    *   @param string $key
+    *   @param mixed $val
     **/
     public function __set($key, $val)
     {
-        return $this->offsetset($key, $val);
+        return $this->offsetSet($key, $val);
     }
 
     /**
     *   Alias for offsetget()
     *   @return mixed
-    *   @param $key string
+    *   @param string $key
     **/
     public function &__get($key)
     {
-        $val=&$this->offsetget($key);
+        $val=&$this->offsetGet($key);
         return $val;
     }
 
     /**
     *   Alias for offsetunset()
-    *   @param $key string
+    *   @param string $key
     **/
     public function __unset($key)
     {
-        $this->offsetunset($key);
+        $this->offsetUnset($key);
     }
 }

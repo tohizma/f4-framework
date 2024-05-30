@@ -28,6 +28,7 @@ use F4\Base;
 use F4\Cache;
 use F4\Database\Cursor;
 use F4\Database\Mongo;
+use Traversable;
 
 //! MongoDB mapper
 class Mapper extends Cursor
@@ -48,9 +49,9 @@ class Mapper extends Cursor
     /**
     *   Instantiate class
     *   @return void
-    *   @param $db object
-    *   @param $collection string
-    *   @param $fields array
+    *   @param object $db
+    *   @param string $collection
+    *   @param array $fields
     **/
     public function __construct(Mongo $db, $collection, $fields = null)
     {
@@ -73,7 +74,7 @@ class Mapper extends Cursor
     /**
     *   Return TRUE if field is defined
     *   @return bool
-    *   @param $key string
+    *   @param string $key
     **/
     public function exists($key)
     {
@@ -83,8 +84,8 @@ class Mapper extends Cursor
     /**
     *   Assign value to field
     *   @return scalar|FALSE
-    *   @param $key string
-    *   @param $val scalar
+    *   @param string $key
+    *   @param scalar $val
     **/
     public function set($key, $val)
     {
@@ -94,7 +95,7 @@ class Mapper extends Cursor
     /**
     *   Retrieve value of field
     *   @return scalar|FALSE
-    *   @param $key string
+    *   @param string $key
     **/
     public function &get($key)
     {
@@ -107,7 +108,7 @@ class Mapper extends Cursor
     /**
     *   Delete field
     *   @return NULL
-    *   @param $key string
+    *   @param string $key
     **/
     public function clear($key)
     {
@@ -117,7 +118,7 @@ class Mapper extends Cursor
     /**
     *   Convert array to mapper object
     *   @return static
-    *   @param $row array
+    *   @param array $row
     **/
     public function factory($row)
     {
@@ -136,7 +137,7 @@ class Mapper extends Cursor
     /**
     *   Return fields of mapper object as an associative array
     *   @return array
-    *   @param $obj object
+    *   @param object $obj
     **/
     public function cast($obj = null)
     {
@@ -149,10 +150,10 @@ class Mapper extends Cursor
     /**
     *   Build query and execute
     *   @return static[]
-    *   @param $fields string
-    *   @param $filter array
-    *   @param $options array
-    *   @param $ttl int|array
+    *   @param string $fields
+    *   @param array $filter
+    *   @param array $options
+    *   @param int|array $ttl
     **/
     public function select($fields = null, $filter = null, array $options = null, $ttl = 0)
     {
@@ -239,9 +240,9 @@ class Mapper extends Cursor
     /**
     *   Return records that match criteria
     *   @return static[]
-    *   @param $filter array
-    *   @param $options array
-    *   @param $ttl int|array
+    *   @param array $filter
+    *   @param array $options
+    *   @param int|array $ttl
     **/
     public function find($filter = null, array $options = null, $ttl = 0)
     {
@@ -260,9 +261,9 @@ class Mapper extends Cursor
     /**
     *   Count records that match criteria
     *   @return int
-    *   @param $filter array
-    *   @param $options array
-    *   @param $ttl int|array
+    *   @param array $filter
+    *   @param array $options
+    *   @param int|array $ttl
     **/
     public function count($filter = null, array $options = null, $ttl = 0)
     {
@@ -290,7 +291,7 @@ class Mapper extends Cursor
     *   Return record at specified offset using criteria of previous
     *   load() call and make it active
     *   @return array
-    *   @param $ofs int
+    *   @param int $ofs
     **/
     public function skip($ofs = 1)
     {
@@ -368,8 +369,8 @@ class Mapper extends Cursor
     /**
     *   Delete current record
     *   @return bool
-    *   @param $quick bool
-    *   @param $filter array
+    *   @param bool $quick
+    *   @param array $filter
     **/
     public function erase($filter = null, $quick = true)
     {
@@ -421,8 +422,8 @@ class Mapper extends Cursor
     /**
     *   Hydrate mapper object using hive array variable
     *   @return NULL
-    *   @param $var array|string
-    *   @param $func callback
+    *   @param array|string $var
+    *   @param callable $func
     **/
     public function copyfrom($var, $func = null)
     {
@@ -440,7 +441,7 @@ class Mapper extends Cursor
     /**
     *   Populate hive array variable with mapper fields
     *   @return NULL
-    *   @param $key string
+    *   @param string $key
     **/
     public function copyto($key)
     {
@@ -472,7 +473,7 @@ class Mapper extends Cursor
     *   Retrieve external iterator for fields
     *   @return object
     **/
-    public function getiterator()
+    public function getiterator() : Traversable
     {
         return new \ArrayIterator($this->cast());
     }

@@ -30,10 +30,23 @@ class Log
     protected $file;
 
     /**
+    *   Instantiate class
+    *   @param string $file
+    **/
+    public function __construct($file)
+    {
+        $fw = Base::instance();
+        if (!is_dir($dir = $fw->LOGS)) {
+            mkdir($dir, Base::MODE, true);
+        }
+        $this->file = $dir . $file;
+    }
+
+    /**
     *   Write specified text to log file
     *   @return string
-    *   @param $text string
-    *   @param $format string
+    *   @param string $text
+    *   @param string $format
     **/
     public function write($text, $format = 'r')
     {
@@ -62,18 +75,5 @@ class Log
     public function erase()
     {
         unlink($this->file);
-    }
-
-    /**
-    *   Instantiate class
-    *   @param $file string
-    **/
-    public function __construct($file)
-    {
-        $fw = Base::instance();
-        if (!is_dir($dir = $fw->LOGS)) {
-            mkdir($dir, Base::MODE, true);
-        }
-        $this->file = $dir . $file;
-    }
+    }    
 }

@@ -38,7 +38,7 @@ class Audit extends Prefab
     /**
     *   Return TRUE if string is a valid URL
     *   @return bool
-    *   @param $str string
+    *   @param string $str
     **/
     public function url($str)
     {
@@ -50,8 +50,8 @@ class Audit extends Prefab
     *   Return TRUE if string is a valid e-mail address;
     *   Check DNS MX records if specified
     *   @return bool
-    *   @param $str string
-    *   @param $mx boolean
+    *   @param string $str
+    *   @param boolean $mx
     **/
     public function email($str, $mx = true)
     {
@@ -74,7 +74,7 @@ class Audit extends Prefab
     /**
     *   Return TRUE if string is a valid IPV4 address
     *   @return bool
-    *   @param $addr string
+    *   @param string $addr
     **/
     public function ipv4($addr)
     {
@@ -84,7 +84,7 @@ class Audit extends Prefab
     /**
     *   Return TRUE if string is a valid IPV6 address
     *   @return bool
-    *   @param $addr string
+    *   @param string $addr
     **/
     public function ipv6($addr)
     {
@@ -94,7 +94,7 @@ class Audit extends Prefab
     /**
     *   Return TRUE if IP address is within private range
     *   @return bool
-    *   @param $addr string
+    *   @param string $addr
     **/
     public function isprivate($addr)
     {
@@ -108,7 +108,7 @@ class Audit extends Prefab
     /**
     *   Return TRUE if IP address is within reserved range
     *   @return bool
-    *   @param $addr string
+    *   @param string $addr
     **/
     public function isreserved($addr)
     {
@@ -122,7 +122,7 @@ class Audit extends Prefab
     /**
     *   Return TRUE if IP address is neither private nor reserved
     *   @return bool
-    *   @param $addr string
+    *   @param string $addr
     **/
     public function ispublic($addr)
     {
@@ -137,7 +137,7 @@ class Audit extends Prefab
     /**
     *   Return TRUE if user agent is a desktop browser
     *   @return bool
-    *   @param $agent string
+    *   @param string $agent
     **/
     public function isdesktop($agent = null)
     {
@@ -151,7 +151,7 @@ class Audit extends Prefab
     /**
     *   Return TRUE if user agent is a mobile device
     *   @return bool
-    *   @param $agent string
+    *   @param string $agent
     **/
     public function ismobile($agent = null)
     {
@@ -164,7 +164,7 @@ class Audit extends Prefab
     /**
     *   Return TRUE if user agent is a Web bot
     *   @return bool
-    *   @param $agent string
+    *   @param string $agent
     **/
     public function isbot($agent = null)
     {
@@ -177,7 +177,7 @@ class Audit extends Prefab
     /**
     *   Return TRUE if specified ID has a valid (Luhn) Mod-10 check digit
     *   @return bool
-    *   @param $id string
+    *   @param string $id
     **/
     public function mod10($id)
     {
@@ -195,7 +195,7 @@ class Audit extends Prefab
     /**
     *   Return credit card type if number is valid
     *   @return string|FALSE
-    *   @param $id string
+    *   @param string $id
     **/
     public function card($id)
     {
@@ -228,7 +228,7 @@ class Audit extends Prefab
     /**
     *   Return entropy estimate of a password (NIST 800-63)
     *   @return int|float
-    *   @param $str string
+    *   @param string $str
     **/
     public function entropy($str)
     {

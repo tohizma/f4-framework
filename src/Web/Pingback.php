@@ -77,7 +77,7 @@ class Pingback extends Prefab
     *   Load local page contents, parse HTML anchor tags, find permalinks,
     *   and send XML-RPC calls to corresponding pingback servers
     *   @return NULL
-    *   @param $source string
+    *   @param string $source
     **/
     public function inspect($source)
     {
@@ -89,7 +89,7 @@ class Pingback extends Prefab
         ) {
             $req = $web->request($source);
             $doc = new \DOMDocument('1.0', $fw->ENCODING);
-            $doc->stricterrorchecking = false;
+            $doc->strictErrorChecking = false;
             $doc->recover = true;
             if (@$doc->loadhtml($req['body'])) {
                 // Parse anchor tags
@@ -126,8 +126,8 @@ class Pingback extends Prefab
     *   Receive ping, check if local page is pingback-enabled, verify
     *   source contents, and return XML-RPC response
     *   @return string
-    *   @param $func callback
-    *   @param $path string
+    *   @param callable $func
+    *   @param string $path
     **/
     public function listen($func, $path = null)
     {
